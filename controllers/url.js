@@ -1,10 +1,10 @@
 const validUrl = require('valid-url');
-const shortid = require('shortid');
-const Url = require('./models/url-model');
-const Error = require('./lib/error');
+const shortid = require('short-id');
+const Url = require('../models/url-model');
+const Error = require('../lib/error');
 const baseUrl = 'http:localhost:1111'
 
-const Url = async(req, res) => {
+const urlShortner = async(req, res) => {
     const { longUrl } = req.body;
     // check base url if valid using the validUrl.isUri method
     if (!validUrl.isUri(baseUrl)) {
@@ -43,4 +43,4 @@ const Url = async(req, res) => {
     }
 }
 
-module.exports = Url;
+module.exports = urlShortner;

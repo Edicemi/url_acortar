@@ -4,6 +4,12 @@ const express = require('express');
 logger = require('morgan');
 const app = express();
 
+const urlRouter = require('./routes/v1/url-route');
+
+
+//api routes
+app.use('/v1/url', urlRouter);
+
 //server
 app.listen(process.env.PORT, _ => {
     console.log(`Server running on PORT ${ process.env.PORT } `);
