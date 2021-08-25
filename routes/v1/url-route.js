@@ -2,6 +2,6 @@ const express = require('express');
 router = express.Router();
 const Url = require('../../controllers/url');
 
-router.post('/shorturl', Url);
+router.post('/short', Url);
 
 module.exports = router;
