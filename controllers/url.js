@@ -1,16 +1,51 @@
-const short = async(req, res) => {
-    // Grab the fullUrl parameter from the req.body
-    const fullUrl = req.body.fullUrl
-    console.log('URL requested: ', fullUrl)
+const Url = require('../models/url-model');
+const shortId = require('short-id');
+const utils = require('../lib/utils');
+require('dotenv').config();
 
-    // insert and wait for the record to be inserted using the model
-    const record = new ShortURL({
-        full: fullUrl
-    })
+const urlShort = async(req, res) => {
+    const fullUrl = req.body;
+    const baseUrl = process.env.BASE_URL;
+    const urlId = shortId.generate();
+    if (utils.validateUrl(fullUrl)) {
+        try {
+            let url = awaitUrl.findOne({ fullUrl });
+            if (url) {
+                res.json(url);
+            } else {
+                const shortUrl = `${baseUrl}/${urlId}`;
 
-    await record.save()
+                url = new Url({
+                    fullUrl,
+                    shortUrl,
+                    urlId,
+                    date: new Date(),
+                });
+                await url.save();
+                res.json(url);
+            }
+        } catch (err) {
+            console.log(err);
+            res.status(500).json('Server Error');
+        }
+    } else {
+        res.status(400).json('Invalid Original Url');
+    }
+};
 
-    res.redirect('/')
+const getUrl = async(req, res) => {
+    try {
+        const { urlId } = req.params;
+        const url = await Url.findOne({ urlId });
+        if (url) {
+            url.clicks++;
+            url.save();
+            return res.redirect(url.fullUrl);
+        } else res.status(404).json('Not Found');
+    } catch (err) {
+        console.log(err);
+        res.status(500).json('Server Error');
+    }
 }
 
-module.exports = short;
+module.exports = { urlShort, getUrl };
