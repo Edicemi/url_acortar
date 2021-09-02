@@ -21,6 +21,7 @@
         "mongoose": "^5.13.7",
         "morgan": "^1.10.0",
         "short-id": "*",
+        "url-validation": "^2.1.0",
         "valid-url": "^1.0.9"
     }
 }
