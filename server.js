@@ -7,6 +7,7 @@ const ShortURL = require('./models/url-model');
 const urlRouter = require('./routes/v1/url-route');
 
 //middleware
+app.use(logger('dev'));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 // set view engine
