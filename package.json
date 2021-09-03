@@ -21,7 +21,7 @@
         "logger": "^0.0.1",
         "mongoose": "^5.13.7",
         "morgan": "^1.10.0",
-        "short-id": "*",
+        "shortid": "^2.2.16",
         "url-validation": "^2.1.0",
         "valid-url": "^1.0.9"
     }
