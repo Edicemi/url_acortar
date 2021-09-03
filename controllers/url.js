@@ -15,7 +15,7 @@ const urlShort = async(req, res) => {
         if (url) {
             res.json(url);
         } else {
-            const shortUrl = `${baseUrl}/${urlId}`;
+            const shortUrl = `${baseUrl}/v1/url/${urlId}`;
             url = new Url({
                 fullUrl,
                 shortUrl,
