@@ -12,6 +12,7 @@ const urlShort = async(req, res) => {
     // if (await isValidURL(fullUrl)) {
     try {
         let url = await Url.findOne({ fullUrl });
+        console.log(url);
         if (!url) {
             res.json("Enter a url");
         } else {
