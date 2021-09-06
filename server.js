@@ -22,7 +22,7 @@ app.use('/v1/url', urlRouter);
 app.get('/', async(req, res) => {
     console.log('Request Sent')
     const allData = await ShortURL.find()
-    res.render('index', { shortUrls: allData })
+    res.render('index', { shortUrl: false })
 });
 
 //server
