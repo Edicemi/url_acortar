@@ -13,7 +13,7 @@ const urlShort = async (req, res) => {
   try {
     let url = await Url.findOne({ fullUrl });
     if (!url) {
-      res.json("Abeg enter url");
+      res.json("Enter a url");
     } else {
       const shortUrl = `${baseUrl}/${urlId}`;
       url = new Url({

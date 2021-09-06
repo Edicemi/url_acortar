@@ -16,7 +16,7 @@ app.set('view engine', 'ejs');
 
 
 //api routes
-app.use('/v1/url', urlRouter);
+app.use('/', urlRouter);
 
 //home route
 app.get('/', async(req, res) => {
