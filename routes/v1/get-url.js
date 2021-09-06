@@ -1,8 +1,7 @@
 const express = require('express');
 router = express.Router();
-const urlShort = require('../../controllers/url');
+const getUrl = require('../../controllers/get');
 
-router.post('/short', urlShort);
-
+router.get('/:urlId', getUrl);
 
 module.exports = router;

@@ -5,6 +5,7 @@ logger = require('morgan');
 const app = express();
 const ShortURL = require('./models/url-model');
 const urlRouter = require('./routes/v1/url-route');
+const getUrl = require('./routes/v1/get-url');
 
 //middleware
 app.use(logger('dev'));
@@ -16,7 +17,8 @@ app.set('view engine', 'ejs');
 
 
 //api routes
-app.use('', urlRouter);
+app.use('/v1/url', urlRouter);
+app.use('', getUrl);
 
 //home route
 app.get('/', async(req, res) => {
