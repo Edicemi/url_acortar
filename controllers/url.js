@@ -13,8 +13,8 @@ const urlShort = async(req, res) => {
     try {
         let url = await Url.findOne({ fullUrl });
         console.log(url);
-        if (!url) {
-            res.json("Enter a url");
+        if (url) {
+            res.render("index",{shortUrl:url});
         } else {
             const shortUrl = `${baseUrl}/${urlId}`;
             url = new Url({
@@ -37,7 +37,5 @@ const urlShort = async(req, res) => {
     //     res.status(400).json('Invalid Original Url');
     // }
 };
-
-
 
 module.exports = urlShort;
