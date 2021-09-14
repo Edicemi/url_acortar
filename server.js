@@ -23,6 +23,7 @@ app.use('', getUrl);
 //home route
 app.get('/', async(req, res) => {
     const allData = await ShortURL.find({});
+    console.log('Request Sent');
     console.log(allData);
     res.render('index', { shortUrl: allData });
 });

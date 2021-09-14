@@ -32,9 +32,8 @@
                     <% shortUrl.forEach( urls => { %>
                         <tr>
                             <td>
-                                <a href="<%= urls.fullUrl %>">
-                                    <%= urls.fullUrl %>
-                                </a>
+                                <%= urls.fullUrl %>
+                                    </a>
                             </td>
                             <td>
                                 <a href="<%= urls.shortUrl %>">
@@ -87,6 +86,9 @@
             });
         });
     </script>
-</body>
 
-</html>
+    <tbody>
+        <tr>
+            <td>
+                <a href="<%= shortUrl.fullUrl %>">
+                
