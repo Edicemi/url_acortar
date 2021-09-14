@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" />
+    <title>Edicemi URL Shortner Project</title>
+</head>
+
+<body>
+    <div class="container">
+        <h1>URL Shortner</h1>
+        <form action="/v1/url/short" method="POST" class="my-4 form-inline">
+            <label for="fullUrl" class="sr-only">URL</label>
+            <input required placeholder="URL" type="url" name="fullUrl" id="fullUrl" class="form-control col mr-2" />
+            <button class="btn btn-success" type="submit">Shrink This!</button>
+        </form>
+
+
+        <% if (shortUrl) { %>
+            <table class="table table-striped table-responsive">
+                <thead>
+                    <tr>
+                        <th>Full URL</th>
+                        <th>Short URL</th>
+                        <th>Clicks</th>
+                    </tr>
+                </thead>
+                <tbody id="tableBody">
+                    <% shortUrl.forEach( urls => { %>
+                        <tr>
+                            <td>
+                                <a href="<%= urls.fullUrl %>">
+                                    <%= urls.fullUrl %>
+                                </a>
+                            </td>
+                            <td>
+                                <a href="<%= urls.shortUrl %>">
+                                    <%= urls.shortUrl %>
+                                </a>
+                            </td>
+                            <td>
+                                <%= urls.clicks %>
+                            </td>
+                        </tr>
+                        <% }) %>
+                </tbody>
+                </tbody>
+            </table>
+            <% } else { %>
+                <div> You have not shortened any url </div>
+                <% } %>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $('form').on('submit', function(e) {
+            e.preventDefault();
+            let btn = $('button[type=submit]');
+            $.post($(this).attr('action'), $(this).serialize(), function(data) {
+                btn.attr('disabled', 'disabled').text('Shrinking...');
+                if (data.success === true) {
+                    $('#tableBody').append(`
+                    <tr>
+                        <td>
+                            <a href="${data.data.fullUrl}">
+                                ${data.data.fullUrl}
+                            </a>
+                        </td>
+                        <td>
+                            <a href="${data.data.shortUrl}">
+                                ${data.data.shortUrl}
+                            </a>
+                        </td>
+                        <td>
+                            ${data.data.clicks}
+                        </td>
+                    </tr>  
+                `);
+                    btn.removeAttr('disabled').text('Shrink This!');
+                } else {
+                    alert(data.message);
+                    btn.removeAttr('disabled').text('Shrink This!');
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>
